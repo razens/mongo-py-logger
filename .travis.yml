@@ -1,0 +1,14 @@
+language: python 
+python:
+ - "2.7"
+
+script:
+ - mongo-py-logger
+
+deploy:
+ provider: pypi
+ user: razens
+ password: unixoids86
+ on:
+	 tags: true
+	 branch: master

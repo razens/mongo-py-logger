@@ -61,17 +61,20 @@ class MongoLogger(logging.Logger):
         )
         # set a json format
         json_format = {
-            'name': '%(name)s',
-            'module': '%(module)s',
+            'debug': {
+                'levelname': '%(levelname)s',
+                'name': '%(name)s',
+                'module': '%(module)s',
+                'process': '%(process)d',
+                'processName': '%(processName)s',
+                'thread': '%(thread)d',
+                'threadName': '%(threadName)s',
+                'pathname': '%(pathname)s',
+                'filename': '%(filename)s',
+                'funcName': '%(funcName)s',
+                'lineno': '%(lineno)d',
+            },
             'levelname': '%(levelname)s',
-            'process': '%(process)d',
-            'processName': '%(processName)s',
-            'thread': '%(thread)d',
-            'threadName': '%(threadName)s',
-            'pathname': '%(pathname)s',
-            'filename': '%(filename)s',
-            'funcName': '%(funcName)s',
-            'lineno': '%(lineno)d',
             'message': '%(message)s'
         }
         for key, val in self.kwarg.items():

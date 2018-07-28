@@ -4,7 +4,7 @@ import sys
 from contextlib import contextmanager
 from unittest import TestCase
 from StringIO import StringIO
-from mongo_py_logger.logger import MongoLogger
+from mongolog.logger import MongoLogger
 
 
 class PyLoggerTests(TestCase):

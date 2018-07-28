@@ -199,6 +199,7 @@ class MongoHandler(logging.Handler):
                 rec = self.fix_dict_keys(rec)
                 getattr(self.collection, write_method)(rec)
             except Exception as e:
+                logging.error("Unable to save log record: %s", e.message, exc_info=True)
                 if not self.fail_silently:
                     self.handleError(record)
 

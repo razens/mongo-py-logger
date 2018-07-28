@@ -24,7 +24,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='mongo-py-logger',
-    version='1.3.0',
+    version='1.5.0',
     description='Logger for python, with option logging to restful api.',
     long_description=long_description,
     include_package_data=True,

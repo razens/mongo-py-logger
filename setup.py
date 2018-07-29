@@ -25,12 +25,12 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='mongo-py-logger',
     version='1.5.0',
-    description='Logger for python, with option logging to restful api.',
+    description='Logger for python, with MongoHandler.',
     long_description=long_description,
     include_package_data=True,
-    url='https://github.intel.com/MVS/mongo-py-logger',
+    url='https://github.com/razens/mongo-py-logger',
     author='Andrey Arambitsky',
-    author_email='andrey.arambitsky@intel.com',
+    author_email='razens@gmail.com',
     license='MIT',
     classifiers=[
         # How mature is this project? Common values are

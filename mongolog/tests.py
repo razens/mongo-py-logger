@@ -4,6 +4,9 @@ import sys
 from contextlib import contextmanager
 from unittest import TestCase
 from StringIO import StringIO
+
+import os
+
 from mongolog.logger import MongoLogger
 
 
@@ -29,7 +32,9 @@ class PyLoggerTests(TestCase):
         self.assertEqual(error, '', msg='Error output was not empty, some error occurred')
 
     def test_write_debug_with_extra(self):
-        json_data = json.loads(open('data/json_1.json').read())
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(current_dir, 'data', 'json_1.json')
+        json_data = json.loads(open(path).read())
         with self.captured_output() as (out, err):
             self.logger.debug('json extra', extra={'PitBoss Log': json_data})
         error = err.getvalue().strip()

@@ -2,6 +2,8 @@ import json
 import logging
 import ssl
 
+import time
+
 from bson import json_util
 
 from handlers import MongoHandler, MongoFormatter
@@ -59,6 +61,7 @@ class MongoLogger(logging.Logger):
         log_formatter = logging.Formatter(
             "[%(asctime)s - %(name)s - %(module)s - %(levelname)s - %(processName)s - %(threadName)s] %(message)s"
         )
+        log_formatter.converter = time.gmtime
         # set a json format
         json_format = {
             'debug': {
@@ -75,11 +78,13 @@ class MongoLogger(logging.Logger):
                 'lineno': '%(lineno)d',
             },
             'levelname': '%(levelname)s',
-            'message': '%(message)s'
+            'message': '%(message)s',
+            'asctime': '%(asctime)s'
         }
         for key, val in self.kwarg.items():
             json_format[key] = val
         json_stringify_formatter = logging.Formatter(json.dumps(json_format))
+        json_stringify_formatter.converter = time.gmtime
         return json_stringify_formatter, log_formatter
 
     def pull_logs(self, query):

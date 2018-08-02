@@ -2,6 +2,8 @@ import json
 import logging
 import re
 
+from datetime import datetime
+
 try:
     from pymongo import MongoClient as Connection
 except ImportError:
@@ -58,6 +60,7 @@ class MongoFormatter(logging.Formatter):
     def format(self, record):
         """Formats LogRecord into python dictionary."""
         # Standard document
+        record.asctime = str(datetime.utcnow()) + 'Z'
         s = self.fmt % record.__dict__
         s = s.replace('\\', '/')
         document = json.loads(s)

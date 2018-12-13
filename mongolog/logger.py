@@ -36,7 +36,7 @@ class MongoLogger(logging.Logger):
         json_stringify_formatter, text_formatter = self.__config_formatters()
         console_info_handler = logging.StreamHandler()
         console_info_handler.setFormatter(text_formatter)
-        if self.__cert_path:
+        if self.__cert_path or self.__ca_cert_path:
             mongodb_handler = MongoHandler(
                 host=mongodb_connection_string,
                 database_name=self.__db_name,

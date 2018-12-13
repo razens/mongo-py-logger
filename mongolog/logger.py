@@ -11,8 +11,8 @@ from handlers import MongoHandler, MongoFormatter
 
 
 class MongoLogger(logging.Logger):
-    def __init__(self, mongodb_connection_string, cert_path=None, name=None, collection_name='logs_collection',
-                 **kwargs):
+    def __init__(self, mongodb_connection_string, cert_path=None, ca_cert_path=None, name=None,
+                 collection_name='logs_collection', **kwargs):
         """
         :param mongodb_connection_string: connection string to mongoDB with format:
         mongodb://[username]:[password]@[host:port,host:port]/[db name]?ssl=true&replicaSet=mongo7581
@@ -26,6 +26,7 @@ class MongoLogger(logging.Logger):
         self.kwarg = kwargs
         self.__collection_name = collection_name
         self.__cert_path = cert_path
+        self.__ca_cert_path = ca_cert_path
         self.__db_name = mongodb_connection_string.split('/')[-1].split('?')[0]
         name = name or self.__class__.__name__
         super(MongoLogger, self).__init__(name)
@@ -45,7 +46,7 @@ class MongoLogger(logging.Logger):
                 ssl=True,
                 ssl_certfile=self.__cert_path,
                 ssl_cert_reqs=ssl.CERT_REQUIRED,
-                ssl_ca_certs=self.__cert_path)
+                ssl_ca_certs=self.__ca_cert_path)
         else:
             mongodb_handler = MongoHandler(
                 host=mongodb_connection_string,
